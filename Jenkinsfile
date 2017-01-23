@@ -6,7 +6,7 @@ node {
    stage('Testing') {
       //Run the tests
       sh "/usr/bin/ansible-lint F5file_build.yml"
-      sh "/usr/bin/ansible-review F5file_build.yml"
+      //sh "/usr/bin/ansible-review F5file_build.yml"
    }
    stage('Build') {
        //Ansible Playbook
