@@ -1,14 +1,12 @@
 node {
    stage('Preparation') { 
       // Get some code from a GitHub repository
-      git 'https://github.com/mcgonagle/F5file.git'
+      git 'https://github.com/mcgonagle/F5file_ravello.git'
    }
    stage('Testing') {
       //Run the tests
-      sh "/usr/local/bin/ansible-lint F5file_build.yml"
-      sh "/usr/local/bin/ansible-review F5file_build.yml"
-      sh "/usr/local/bin/ansible-lint F5file_enable.yml"
-      sh "/usr/local/bin/ansible-review F5file_enable.yml"
+      sh "/usr/bin/ansible-lint F5file_build.yml"
+      sh "/usr/bin/ansible-review F5file_build.yml"
    }
    stage('Build') {
        //Ansible Playbook
@@ -19,7 +17,7 @@ node {
          sudoUser: null,
          extraVars: [
             username: 'admin',
-            password: [value: 'adminadmin', hidden: true],
+            password: [value: 'admin', hidden: true],
             hosts: 'bigip_hosts'
          ])
       //chatops slack message that ansible run has completed
@@ -44,7 +42,7 @@ node {
          sudoUser: null,
          extraVars: [
             username: 'admin',
-            password: [value: 'adminadmin', hidden: true],
+            password: [value: 'admin', hidden: true],
             hosts: 'bigip_hosts'
          ])
       //chatops slack message that ansible run has completed
